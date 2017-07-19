@@ -28,9 +28,19 @@ def naked_twins(values):
     Returns:
         the values dictionary with the naked twins eliminated from peers.
     """
-
-    # Find all instances of naked twins
-    # Eliminate the naked twins as possibilities for their peers
+    for unit in unitlist:
+        # Find all instances of naked twins
+        duo_list = [values[box] for box in unit if len(values[box])==2]
+        duo_count_dict = {twins:duo_list.count(twins) for twins in duo_list}
+        twins_list = [key for key, value in duo_count_dict.items() if value==2]
+        # Eliminate the naked twins as possibilities for their peers
+        peers_with_twins = [box for box in unit if len(values[box])>2]
+        if len(twins_list) > 0:
+            for twins in twins_list:
+                for digit in list(twins):
+                    for peer in peers_with_twins:
+                        values = assign_value(values, peer, values[peer].replace(digit,''))
+    return values
 
 
 def cross(A, B):
