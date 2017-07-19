@@ -3,11 +3,15 @@
 
 # Question 1 (Naked Twins)
 Q: How do we use constraint propagation to solve the naked twins problem?  
-A: *Student should provide answer here*
+A: Enforce the constraints that no peers ofthe naed twins squares can contain digits in the twin values.
+   For each unit:
+    1. Find all naked twins,
+    2. Remove digits in twin values from values in peers.
+    
 
 # Question 2 (Diagonal Sudoku)
 Q: How do we use constraint propagation to solve the diagonal sudoku problem?  
-A: *Student should provide answer here*
+A: Adding a new constraint for diagonal unit: digits 1-9 can only appear once in each diagonal. By adding two diagonal units to the unit list we can easily solve diagonal sudoku.
 
 ### Install
 
