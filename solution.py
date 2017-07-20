@@ -1,4 +1,6 @@
-## TODO: modify naked_twins
+## TODO: add logging and debug mode
+
+## Reference: most methods are based on AIND course material
 
 
 assignments = []
@@ -28,13 +30,16 @@ def naked_twins(values):
     Returns:
         the values dictionary with the naked twins eliminated from peers.
     """
+    # Find all instances of naked twins
+    # loop over units checking if there is are any naked twins
     for unit in unitlist:
-        # Find all instances of naked twins
+        # get all boxes with a length of two
         duo_list = [values[box] for box in unit if len(values[box])==2]
+        # now get all the naked pair twins ie exists twice in pairs
         duo_count_dict = {twins:duo_list.count(twins) for twins in duo_list}
         twins_list = [key for key, value in duo_count_dict.items() if value==2]
-        # Eliminate the naked twins as possibilities for their peers
-        peers_with_twins = [box for box in unit if len(values[box])>2]
+        # iterate through the naked_twins removing the values from the non naked twin boxes
+        peers_with_twins = [box for box in unit if ((len(values[box])>1)&(values[box] not in twins_list))]
         if len(twins_list) > 0:
             for twins in twins_list:
                 for digit in list(twins):
